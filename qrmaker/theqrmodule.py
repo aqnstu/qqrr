@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from qrmaker import data, ECC, structure, matrix, draw
+from qrmaker import data, ecc, structure, matrix, draw
 
 # ver: Version from 1 to 40
 # ecl: Error Correction Level (L ,M, Q, H)
@@ -9,10 +9,10 @@ def get_qrcode(ver, ecl, str, save_place):
     ver, data_codewords = data.encode(ver, ecl, str)
 
     # Error Correction Coding
-    ecc = ECC.encode(ver, ecl, data_codewords)
+    ecc_ = ecc.encode(ver, ecl, data_codewords)
     
     # Structure final bits
-    final_bits = structure.structure_final_bits(ver, ecl, data_codewords, ecc)
+    final_bits = structure.structure_final_bits(ver, ecl, data_codewords, ecc_)
     
     # Get the QR Matrix
     qrmatrix = matrix.get_qrmatrix(ver, ecl, final_bits)

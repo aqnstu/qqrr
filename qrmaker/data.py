@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-
-from qrmaker.constant import char_cap, required_bytes, mindex, lindex, num_list, alphanum_list, grouping_list, mode_indicator
-
-# ecl: Error Correction Level(L,M,Q,H)
+from qrmaker.constant import (
+    char_cap, required_bytes, mindex,
+    lindex, num_list, alphanum_list,
+    grouping_list, mode_indicator
+)
 
 
 def encode(ver, ecl, str):
+    # ecl: Error Correction Level(L,M,Q,H)
     mode_encoding = {
         'numeric': numeric_encoding,
         'alphanumeric': alphanumeric_encoding,
@@ -14,8 +16,6 @@ def encode(ver, ecl, str):
     }
 
     ver, mode = analyse(ver, ecl, str)
-
-    print('line 16: mode:', mode)
 
     code = mode_indicator[mode] + \
         get_cci(ver, mode, str) + mode_encoding[mode](str)
